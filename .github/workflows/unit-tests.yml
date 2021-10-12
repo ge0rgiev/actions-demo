@@ -28,8 +28,9 @@ jobs:
       - name: Run the tests
         run: npm test
 
-      - name: 1st Stage
-        run: echo 1st stage
+      - name: Export Tests to JIRA
+        if: always()
+        run: echo Export to JIRA
 
-      - name: 2nd Stage
-        run: echo Second stage
+      - name: Build the project
+        run: echo Build the Project
