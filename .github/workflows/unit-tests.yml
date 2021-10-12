@@ -23,8 +23,12 @@ jobs:
         with: 
           node-version: 14
           
-      - name: npm config path
-        run: npm config get cache
+      - name: Get Yarn cache directory
+        id: npm-cache-dir
+        run: echo "::set-output name=dir::$(config config get cache)"
+          
+      - name: npm folder list
+        run: cd ${{ steps.npm-cache-dir.outputs.dir }} && ls -al
           
       - name: Cache node modules
         id: cacheNodeMoudlesStep
@@ -33,12 +37,15 @@ jobs:
           cache-name: cache-node-modules
         with:
           # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: ~/.npm
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
+            
+      - name: npm folder list
+        run: cd ${{ steps.npm-cache-dir.outputs.dir }} && ls -al
         
       - name: Show dir structure
         run: cd /home/runner/work/actions-demo/actions-demo && ls -al
@@ -49,6 +56,12 @@ jobs:
         
       - name: Show dir structure
         run: ls -al
+        
+      - name: npm folder list
+        run: cd ${{ steps.npm-cache-dir.outputs.dir }} && ls -al
+        
+      - name: Show root dir structure
+        run: cd /home/runner/work/actions-demo/actions-demo && ls -al
         
       - name: Run the tests
         run: npm test
