@@ -6,6 +6,7 @@ on:
       - workflow-test
     paths:
       - 'NestApp/**'
+  workflow_dispatch:
     
 jobs:
   build:
