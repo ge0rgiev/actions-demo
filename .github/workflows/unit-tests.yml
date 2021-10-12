@@ -23,8 +23,8 @@ jobs:
         with: 
           node-version: 14
           
-      - name: npm folder list
-        run: cd ~/.npm && ls -al
+      - name: home runner list
+        run: cd /home/runner && ls -al
           
       - name: Cache node modules
         id: cacheNodeMoudlesStep
@@ -40,8 +40,8 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
             
-      - name: npm folder list
-        run: cd ~/.npm && ls -al
+      - name: home runner list
+        run: cd /home/runner && ls -al
         
       - name: Show dir structure
         run: cd /home/runner/work/actions-demo/actions-demo && ls -al
