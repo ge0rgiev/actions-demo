@@ -40,8 +40,8 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
             
-      - name: home runner list
-        run: cd /home/runner && ls -al
+      - name: ~/.npm folder list
+        run: cd /home/runner/.npm && ls -al
         
       - name: Show dir structure
         run: cd /home/runner/work/actions-demo/actions-demo && ls -al
