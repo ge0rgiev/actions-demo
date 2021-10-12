@@ -23,6 +23,9 @@ jobs:
         with: 
           node-version: 14
           
+      - name: npm config path
+        run: npm config get cache
+          
       - name: Cache node modules
         id: cacheNodeMoudlesStep
         uses: actions/cache@v2
