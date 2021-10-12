@@ -17,10 +17,12 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
-        
-      - name: Show dir structure
-        run: cd /home/runner/work/actions-demo/actions-demo && ls -al
-        
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.4.1
+        with: 
+          node-version: 14
+          
       - name: Cache node modules
         id: cacheNodeMoudlesStep
         uses: actions/cache@v2
@@ -37,14 +39,9 @@ jobs:
         
       - name: Show dir structure
         run: cd /home/runner/work/actions-demo/actions-demo && ls -al
-
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v2.4.1
-        with: 
-          node-version: 14
           
       - name: Install dependencies
-        if: steps.cacheNodeMoudlesStep.outputs.cache-hit != 'true'
+#         if: steps.cacheNodeMoudlesStep.outputs.cache-hit != 'true'
         run: npm install
         
       - name: Show dir structure
