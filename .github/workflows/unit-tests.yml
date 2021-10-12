@@ -18,7 +18,11 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v2
         
+      - name: Show dir structure
+        run: ls -al
+        
       - name: Cache node modules
+        id: cacheNodeMoudlesStep
         uses: actions/cache@v2
         env:
           cache-name: cache-node-modules
@@ -30,6 +34,9 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
+        
+      - name: Show dir structure
+        run: ls -al
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.4.1
@@ -37,7 +44,11 @@ jobs:
           node-version: 14
           
       - name: Install dependencies
+        if: steps.cacheNodeMoudlesStep.outputs.cache-hit != 'true'
         run: npm install
+        
+      - name: Show dir structure
+        run: ls -al
         
       - name: Run the tests
         run: npm test
