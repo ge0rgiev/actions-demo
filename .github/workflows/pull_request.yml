@@ -5,7 +5,7 @@ on:
     branches:
       - workflow-test
     paths:
-      - 'GreenbackPlugin/**'
+      - 'NestApp/**'
     
 jobs:
   build:
@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: 'GreenbackPlugin'
+        working-directory: 'NestApp'
 
     steps:
       - name: Clone the repository
